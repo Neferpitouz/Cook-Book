@@ -27,10 +27,21 @@ def shopping_list(dishes, person_count):
     for dish in dishes:
         if dish in cook_book:
             list_ingridients = cook_book[dish]
+            for item in list_ingridients:
+                if result.get(item['ingridient name']) == None:
+                    result.update({item['ingridient name']: []})
+                    result[item['ingridient name']].append({'quantity': item['quantity']})
+                    result[item['ingridient name']].append({'measure': item['measure']})
+                    quantity = int(result[item['ingridient name']][0]['quantity'])
+                    result[item['ingridient name']][0]['quantity'] = quantity * person_count
+                else:
+                    ...
 
         else:
             print(f'Такого блюда как {dish} нет в поваренной книге')
     return result
 
 
-print(shopping_list(['Фахитос', 'Омлет'], 3))
+pprint(shopping_list(['Запеченный картофель', 'Омлет'], 2))
+
+
