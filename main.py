@@ -35,7 +35,8 @@ def shopping_list(dishes, person_count):
                     quantity = int(result[item['ingridient name']][0]['quantity'])
                     result[item['ingridient name']][0]['quantity'] = quantity * person_count
                 else:
-                    ...
+                    quantity = int(item['quantity']) * person_count
+                    result[item['ingridient name']][0]['quantity'] = quantity
 
         else:
             print(f'Такого блюда как {dish} нет в поваренной книге')
@@ -45,3 +46,20 @@ def shopping_list(dishes, person_count):
 pprint(shopping_list(['Запеченный картофель', 'Омлет'], 2))
 
 
+def file_merge(files_name):
+    result = []
+    for file_name in files_name:
+        with open(file_name, encoding='utf-8') as file_obj:
+            result.append(f'{file_name}\n')
+            text = file_obj.readlines()
+            result.append(f'{len(text)}\n')
+            for strokes in text:
+                result.append(f'{str(strokes)}')
+            result.append(f'\n')
+    with open('result.txt', 'w', encoding='utf-8') as file_result:
+        for each in result:
+            file_result.write(each)
+    return result
+
+
+file_merge(['File 1.txt', 'File 2.txt'])
