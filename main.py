@@ -53,7 +53,7 @@ def sorting(files_list):
             text = file_obj.readlines()
             files_str.update({each: len(text)})
     sorted_dict = {}
-    sorted_keys = sorted(files_str, key=files_str.get)  # [1, 3, 2]
+    sorted_keys = sorted(files_str, key=files_str.get)
     for w in sorted_keys:
         sorted_dict[w] = files_str[w]
     return sorted_dict
