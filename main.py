@@ -46,9 +46,22 @@ def shopping_list(dishes, person_count):
 pprint(shopping_list(['Запеченный картофель', 'Омлет'], 2))
 
 
+def sorting(files_list):
+    files_str = {}
+    for each in files_list:
+        with open(each, encoding='utf-8') as file_obj:
+            text = file_obj.readlines()
+            files_str.update({each: len(text)})
+    sorted_dict = {}
+    sorted_keys = sorted(files_str, key=files_str.get)  # [1, 3, 2]
+    for w in sorted_keys:
+        sorted_dict[w] = files_str[w]
+    return sorted_dict
+
+
 def file_merge(files_name):
     result = []
-    for file_name in files_name:
+    for file_name in files_name.keys():
         with open(file_name, encoding='utf-8') as file_obj:
             result.append(f'{file_name}\n')
             text = file_obj.readlines()
@@ -62,4 +75,4 @@ def file_merge(files_name):
     return result
 
 
-file_merge(['File 1.txt', 'File 2.txt'])
+file_merge(sorting(['File 1.txt', 'File 2.txt', 'File 3.txt', 'File 4.txt']))
